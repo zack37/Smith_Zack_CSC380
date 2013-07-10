@@ -1,11 +1,11 @@
 package program;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * User: Berwyn Codeweaver
+ * User: Zack Smith
  * Date: 7/9/13
  * Time: 5:33 PM
  */
@@ -15,35 +15,21 @@ public class Server {
         ServerSocket serverSocket = null;
 
         try {
-            serverSocket = new ServerSocket(4444);
+            serverSocket = new ServerSocket(2337);
         } catch (IOException ioe) {
-            System.out.println("Server can not listen on port 4444");
+            System.err.println("Server can not listen on port 4444");
             System.exit(-1);
         }
 
-        Socket clientSocket = null;
-
-        try {
-            clientSocket = serverSocket.accept();
-        } catch (IOException ioe) {
-            System.out.println("Accept failed: 4444");
-            System.exit(-1);
-        }
-
-        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        MathLogic math = new MathLogic();
-
-        String[] input = in.readLine().split(",");
-
-        if (input.length == 3) {
-            if (input[0].equals("a")) {
-                out.println(math.add(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
-            } else if (input[0].equals("s")) {
-                out.println(math.subtract(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
-            } else {
-                out.println("Sorry. Something went wrong. Please try again");
+        while (true) {
+            try {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected: " + clientSocket.getInetAddress());
+                ClientThread thread = new ClientThread(clientSocket);
+                thread.start();
+            } catch (IOException ioe) {
+                System.err.println("Accept failed: 4444");
+                System.exit(-1);
             }
         }
     }
