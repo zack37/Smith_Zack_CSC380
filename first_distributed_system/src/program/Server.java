@@ -26,6 +26,7 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connected: " + clientSocket.getInetAddress());
                 ClientThread thread = new ClientThread(clientSocket);
+                System.out.println("New client thread made");
                 thread.start();
             } catch (IOException ioe) {
                 System.err.println("Accept failed: 4444");

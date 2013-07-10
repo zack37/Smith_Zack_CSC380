@@ -23,6 +23,7 @@ public class ClientThread extends Thread {
         try {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            System.out.println("Reader and writer made");
 
             MathLogic math = new MathLogic();
 
@@ -30,13 +31,17 @@ public class ClientThread extends Thread {
             while ((fromClient = in.readLine()) != null) {
                 String[] input = fromClient.split(",");
 
+                System.out.println("Client input not null");
 
                 if (input.length == 3) {
                     if (input[0].equals("a")) {
+                        System.out.println("Adding the two numbers");
                         out.println(math.add(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
                     } else if (input[0].equals("s")) {
+                        System.out.println("Subtracting the two numbers");
                         out.println(math.subtract(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
                     } else {
+                        System.err.println("Incorrect format");
                         out.println("Sorry. Something went wrong. Please try again");
                     }
                 }
