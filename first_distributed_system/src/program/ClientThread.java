@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
- * User: Berwyn Codeweaver
+ * User: Zack Smith
  * Date: 7/9/13
  * Time: 8:02 PM
  */
@@ -31,20 +34,23 @@ public class ClientThread extends Thread {
             while ((fromClient = in.readLine()) != null) {
                 String[] input = fromClient.split(",");
 
+                ArrayList<Number> parameters = new ArrayList<Number>();
+
+                for (String s : input) {
+                    if (s.getClass().equals(Number.class))
+                        parameters.add(Double.parseDouble(s));
+                }
+
                 System.out.println("Client input not null");
 
-                if (input.length == 3) {
-                    if (input[0].equals("a")) {
-                        System.out.println("Adding the two numbers");
-                        out.println(math.add(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
-                    } else if (input[0].equals("s")) {
-                        System.out.println("Subtracting the two numbers");
-                        out.println(math.subtract(Integer.parseInt(input[1]), Integer.parseInt(input[2])));
-                    } else {
-                        System.err.println("Incorrect format");
-                        out.println("Sorry. Something went wrong. Please try again");
-                    }
+
+                System.out.println("Performing operation");
+
+                for (Method m : math.getClass().getMethods()) {
+                    if (m.getName().equals(input[0]))
+                        m.invoke(math, parameters);
                 }
+
             }
 
             out.close();
@@ -52,6 +58,10 @@ public class ClientThread extends Thread {
             clientSocket.close();
         } catch (IOException ioe) {
             System.out.println("Something went wrong with reading and writing.");
+        } catch (InvocationTargetException e) {
+            System.out.println("The calling method threw an error");
+        } catch (IllegalAccessException e) {
+            System.out.println("That particular method can not be accessed");
         }
     }
 }

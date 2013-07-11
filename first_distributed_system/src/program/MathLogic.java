@@ -7,11 +7,19 @@ package program;
  */
 public class MathLogic {
 
-    public int add(int one, int two) {
-        return one + two;
+    public double add(Number... params) {
+        double sum = 0;
+        for (Number n : params)
+            sum += n.doubleValue();
+
+        return sum;
     }
 
-    public int subtract(int one, int two) {
-        return one - two;
+    public double subtract(Number... params) {
+        double difference = 0;
+        for (Number n : params)
+            difference -= n.doubleValue();
+
+        return difference;
     }
 }
