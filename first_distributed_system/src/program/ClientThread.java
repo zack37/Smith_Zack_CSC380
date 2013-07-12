@@ -28,28 +28,45 @@ public class ClientThread extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("Reader and writer made");
 
-            MathLogic math = new MathLogic();
-
             String fromClient;
             while ((fromClient = in.readLine()) != null) {
                 String[] input = fromClient.split(",");
 
+                System.out.println("Client input not null");
+
                 ArrayList<Number> parameters = new ArrayList<Number>();
 
                 for (String s : input) {
-                    if (s.getClass().equals(Number.class))
-                        parameters.add(Double.parseDouble(s));
+                    try {
+                        double temp = Double.valueOf(s);
+                        parameters.add(temp);
+                    } catch (NumberFormatException nfe) {
+                        System.out.println("Could not parse data. Moving on...");
+                    }
                 }
-
-                System.out.println("Client input not null");
-
 
                 System.out.println("Performing operation");
 
-                for (Method m : math.getClass().getMethods()) {
-                    if (m.getName().equals(input[0]))
-                        m.invoke(math, parameters);
+                try {
+                    MathLogic math;
+                    Class<MathLogic> loadedMath = (Class<MathLogic>) Class.forName("program.MathLogic");
+                    math = loadedMath.newInstance();
+                    Number[] darnYouJava = new Number[parameters.size()];
+                    for (int i = 0; i < darnYouJava.length; i++)
+                        darnYouJava[i] = parameters.get(i);
+
+                    Method m = loadedMath.getMethod(input[0], Number[].class);
+                    out.println(m.invoke(math, new Object[]{darnYouJava}));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
                 }
+
 
             }
 
@@ -58,8 +75,6 @@ public class ClientThread extends Thread {
             clientSocket.close();
         } catch (IOException ioe) {
             System.out.println("Something went wrong with reading and writing.");
-        } catch (InvocationTargetException e) {
-            System.out.println("The calling method threw an error");
         } catch (IllegalAccessException e) {
             System.out.println("That particular method can not be accessed");
         }

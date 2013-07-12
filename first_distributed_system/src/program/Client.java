@@ -18,7 +18,7 @@ public class Client {
         Socket kkSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-        System.out.println("Enter in the formula in the format: (a/s),#,#");
+        System.out.println("Enter in the formula in the format: (operation),#,#,...");
         try {
             kkSocket = new Socket("localhost", 2337);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
@@ -34,6 +34,7 @@ public class Client {
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String clientInput, fromServer;
 
+        //Client communication is first
         while (!(clientInput = stdIn.readLine()).equals("exit")) {
             out.println(clientInput);
             if (clientInput.equals("Bye."))
@@ -43,9 +44,20 @@ public class Client {
             if (fromServer != null) {
                 System.out.println("Server: " + fromServer);
                 out.println(fromServer);
-                out.flush();
             }
         }
+
+        //Server communication is first
+//        while (!(fromServer = in.readLine()).equals(null)) {
+//            if (fromServer != null) {
+//                System.out.println("Server: " + fromServer);
+//            }
+//
+//            clientInput = stdIn.readLine();
+//            if (!clientInput.trim().equals("") || clientInput != null) {
+//                out.println(clientInput);
+//            }
+//        }
 
         out.close();
         in.close();
