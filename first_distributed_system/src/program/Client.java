@@ -1,9 +1,6 @@
 package program;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -32,19 +29,43 @@ public class Client {
         }
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String clientInput, fromServer;
+        String fromServer;
 
         //Client communication is first
-        while (!(clientInput = stdIn.readLine()).equals("exit")) {
-            out.println(clientInput);
-            if (clientInput.equals("Bye."))
-                break;
+        while (true) {
+
+            System.out.print("Class Path (Fully qualified): ");
+            String classPath = stdIn.readLine();
+
+            System.out.print("Method Name: ");
+            String methodName = stdIn.readLine();
+
+            System.out.print("Parameters in comma separated list: ");
+            String[] parameters = stdIn.readLine().split(",");
+
+            Number[] numberParameters = new Number[parameters.length];
+
+            for (int i = 0; i < parameters.length; i++)
+                numberParameters[i] = Double.parseDouble(parameters[i]);
+
+            if (classPath.equals("exit") || methodName.equals("exit")) break;
+
+            Contract contract = new Contract(classPath, methodName, numberParameters);
+            ObjectOutputStream oos = new ObjectOutputStream(kkSocket.getOutputStream());
+
+            oos.writeObject(contract);
+
+            //out.println(clientInput);
+//            if (clientInput.equals("Bye."))
+//                break;
 
             fromServer = in.readLine();
             if (fromServer != null) {
                 System.out.println("Server: " + fromServer);
                 out.println(fromServer);
             }
+
+            oos.close();
         }
 
         //Server communication is first
