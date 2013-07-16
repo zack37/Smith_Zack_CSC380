@@ -18,7 +18,7 @@ public class Client {
         ObjectOutputStream oos = null;
         try {
             kkSocket = new Socket("localhost", 2337);
-            out = new PrintWriter(kkSocket.getOutputStream(), true);
+            //out = new PrintWriter(kkSocket.getOutputStream(), true);
             oos = new ObjectOutputStream(kkSocket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         } catch (UnknownHostException uhe) {
@@ -63,7 +63,7 @@ public class Client {
             fromServer = in.readLine();
             if (fromServer != null) {
                 System.out.println("Server: " + fromServer);
-                out.println(fromServer);
+                //out.println(fromServer);
             }
         }
 

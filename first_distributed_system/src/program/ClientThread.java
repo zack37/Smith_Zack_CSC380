@@ -21,7 +21,7 @@ public class ClientThread extends Thread {
     public void run() {
         try {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            ObjectInputStream oIn = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectInputStream oIn = new ObjectInputStream(new BufferedInputStream(clientSocket.getInputStream()));
             //BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("Reader and writer made");
 
@@ -57,11 +57,12 @@ public class ClientThread extends Thread {
             //in.close();
             clientSocket.close();
         } catch (IOException ioe) {
-            System.out.println("Something went wrong with reading and writing.");
+            System.err.println("Something went wrong with reading and writing.");
+            ioe.printStackTrace();
         } catch (IllegalAccessException e) {
-            System.out.println("That particular method can not be accessed");
+            System.err.println("That particular method can not be accessed");
         } catch (ClassNotFoundException e) {
-            System.out.println("Pulling the contract class failed");
+            System.err.println("Pulling the contract class failed");
         }
     }
 }
