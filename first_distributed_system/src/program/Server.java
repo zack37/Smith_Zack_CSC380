@@ -1,6 +1,8 @@
 package program;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -17,7 +19,7 @@ public class Server {
         try {
             serverSocket = new ServerSocket(2337);
         } catch (IOException ioe) {
-            System.err.println("Server can not listen on port 4444");
+            System.err.println("Server can not listen on port 2337");
             System.exit(-1);
         }
 

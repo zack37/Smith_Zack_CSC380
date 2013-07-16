@@ -15,10 +15,11 @@ public class Client {
         Socket kkSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-        System.out.println("Enter in the formula in the format: (operation),#,#,...");
+        ObjectOutputStream oos = null;
         try {
             kkSocket = new Socket("localhost", 2337);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
+            oos = new ObjectOutputStream(kkSocket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         } catch (UnknownHostException uhe) {
             System.err.println("Don't know about host: localhost");
@@ -51,9 +52,9 @@ public class Client {
             if (classPath.equals("exit") || methodName.equals("exit")) break;
 
             Contract contract = new Contract(classPath, methodName, numberParameters);
-            ObjectOutputStream oos = new ObjectOutputStream(kkSocket.getOutputStream());
 
             oos.writeObject(contract);
+            oos.flush();
 
             //out.println(clientInput);
 //            if (clientInput.equals("Bye."))
@@ -64,8 +65,6 @@ public class Client {
                 System.out.println("Server: " + fromServer);
                 out.println(fromServer);
             }
-
-            oos.close();
         }
 
         //Server communication is first
@@ -80,6 +79,7 @@ public class Client {
 //            }
 //        }
 
+        oos.close();
         out.close();
         in.close();
         stdIn.close();

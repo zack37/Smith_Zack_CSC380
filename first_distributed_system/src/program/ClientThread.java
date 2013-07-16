@@ -22,7 +22,7 @@ public class ClientThread extends Thread {
         try {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             ObjectInputStream oIn = new ObjectInputStream(clientSocket.getInputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            //BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("Reader and writer made");
 
             Contract fromClient;
@@ -53,7 +53,8 @@ public class ClientThread extends Thread {
             }
 
             out.close();
-            in.close();
+            oIn.close();
+            //in.close();
             clientSocket.close();
         } catch (IOException ioe) {
             System.out.println("Something went wrong with reading and writing.");
