@@ -37,7 +37,7 @@ public class ClientThread extends Thread {
                     Class loadedObject = Class.forName(fromClient.getClassPath());
                     calling = loadedObject.newInstance();
 
-                    Method m = loadedObject.getMethod(fromClient.getMethodName(), Number[].class);
+                    Method m = loadedObject.getMethod(fromClient.getMethodName(), Object[].class);
                     out.println(m.invoke(calling, new Object[]{fromClient.getParameters()}));
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

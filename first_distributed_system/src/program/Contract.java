@@ -11,15 +11,15 @@ public class Contract implements Serializable {
 
     private String classPath;
     private String methodName;
-    private Number[] parameters;
+    private Object parameters;
 
-    public Contract(String classPath, String methodName, Number[] parameters) {
+    public Contract(String classPath, String methodName, Object parameters) {
         this.classPath = classPath;
         this.methodName = methodName;
         this.parameters = parameters;
     }
 
-    public Number[] getParameters() {
+    public Object getParameters() {
         return parameters;
     }
 

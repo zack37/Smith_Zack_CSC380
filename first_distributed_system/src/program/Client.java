@@ -42,16 +42,11 @@ public class Client {
             String methodName = stdIn.readLine();
 
             System.out.print("Parameters in comma separated list: ");
-            String[] parameters = stdIn.readLine().split(",");
-
-            Number[] numberParameters = new Number[parameters.length];
-
-            for (int i = 0; i < parameters.length; i++)
-                numberParameters[i] = Double.parseDouble(parameters[i]);
+            Object[] parameters = stdIn.readLine().split(",");
 
             if (classPath.equals("exit") || methodName.equals("exit")) break;
 
-            Contract contract = new Contract(classPath, methodName, numberParameters);
+            Contract contract = new Contract(classPath, methodName, parameters);
 
             oos.writeObject(contract);
             oos.flush();
