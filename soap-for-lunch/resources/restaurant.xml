@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<restaurants>
+    <restaurant name="Rubio's">
+        <menuItem>Taco</menuItem>
+    </restaurant>
+    <restaurant name="The Bourbon House">
+        <menuItem>Loosey Juicy</menuItem>
+        <menuItem>Philly CheeseSteak</menuItem>
+    </restaurant>
+</restaurants>

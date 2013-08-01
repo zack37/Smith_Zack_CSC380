@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://neumont.edu/zsmith/lunch/restaurant" xmlns:menu="http://neumont.edu/zsmith/lunch/restaurant" xmlns:soap="http://www.w3.org/2001/12/soap-envelope">
+    <xs:import namespace="http://www.w3.org/2001/12/soap-envelope" schemaLocation="restaurant-soap-response.xsd"/>
+    <xs:element name="RestaurantResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="menu:restaurant"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="restaurant">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="menu:Food"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Food">
+        <xs:complexType>
+            <xs:attribute name="name" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,5 +1,5 @@
 
-package edu.neumont.csc380.jaxb;
+package edu.neumont.csc380.jaxb.post.request;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://neumont.edu/zsmith/lunch/restaurants}RestaurantName"/>
+ *         &lt;element ref="{http://www.w3.org/2001/12/soap-envelope}Body"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "restaurantName"
+    "body"
 })
-@XmlRootElement(name = "GetFood", namespace = "http://neumont.edu/zsmith/lunch/restaurants")
-public class GetFood {
+@XmlRootElement(name = "Envelope", namespace = "http://www.w3.org/2001/12/soap-envelope")
+public class Envelope {
 
-    @XmlElement(name = "RestaurantName", namespace = "http://neumont.edu/zsmith/lunch/restaurants", required = true)
-    protected String restaurantName;
+    @XmlElement(name = "Body", namespace = "http://www.w3.org/2001/12/soap-envelope", required = true)
+    protected Body body;
 
     /**
-     * Gets the value of the restaurantName property.
+     * Gets the value of the body property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Body }
      *     
      */
-    public String getRestaurantName() {
-        return restaurantName;
+    public Body getBody() {
+        return body;
     }
 
     /**
-     * Sets the value of the restaurantName property.
+     * Sets the value of the body property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Body }
      *     
      */
-    public void setRestaurantName(String value) {
-        this.restaurantName = value;
+    public void setBody(Body value) {
+        this.body = value;
     }
 
 }

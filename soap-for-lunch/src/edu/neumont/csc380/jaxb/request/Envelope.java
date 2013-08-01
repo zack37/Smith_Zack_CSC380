@@ -1,5 +1,5 @@
 
-package edu.neumont.csc380.jaxb;
+package edu.neumont.csc380.jaxb.request;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.w3.org/2003/12/soap-envelope}body"/>
+ *         &lt;element ref="{http://www.w3.org/2001/12/soap-envelope}Body"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "body"
 })
-@XmlRootElement(name = "Envelope", namespace = "http://www.w3.org/2003/12/soap-envelope")
+@XmlRootElement(name = "Envelope", namespace = "http://www.w3.org/2001/12/soap-envelope")
 public class Envelope {
 
-    @XmlElement(namespace = "http://www.w3.org/2003/12/soap-envelope", required = true)
+    @XmlElement(name = "Body", namespace = "http://www.w3.org/2001/12/soap-envelope", required = true)
     protected Body body;
 
     /**

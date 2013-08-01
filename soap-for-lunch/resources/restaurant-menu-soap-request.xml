@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/12/soap-envelope">
-    <soap:body xmlns:r="http://neumont.edu/zsmith/lunch/restaurants">
-        <r:GetFood>
-            <r:RestaurantName>Joe's Place</r:RestaurantName>
-        </r:GetFood>
-    </soap:body>
-</soap:Envelope>

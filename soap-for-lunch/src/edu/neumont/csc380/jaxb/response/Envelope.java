@@ -1,5 +1,5 @@
 
-package edu.neumont.csc380.jaxb;
+package edu.neumont.csc380.jaxb.response;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://neumont.edu/zsmith/lunch/restaurants}GetFood"/>
+ *         &lt;element ref="{http://www.w3.org/2001/12/soap-envelope}Body"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getFood"
+    "body"
 })
-@XmlRootElement(name = "body", namespace = "http://www.w3.org/2003/12/soap-envelope")
-public class Body {
+@XmlRootElement(name = "Envelope", namespace = "http://www.w3.org/2001/12/soap-envelope")
+public class Envelope {
 
-    @XmlElement(name = "GetFood", namespace = "http://neumont.edu/zsmith/lunch/restaurants", required = true)
-    protected GetFood getFood;
+    @XmlElement(name = "Body", namespace = "http://www.w3.org/2001/12/soap-envelope", required = true)
+    protected Body body;
 
     /**
-     * Gets the value of the getFood property.
+     * Gets the value of the body property.
      * 
      * @return
      *     possible object is
-     *     {@link GetFood }
+     *     {@link Body }
      *     
      */
-    public GetFood getGetFood() {
-        return getFood;
+    public Body getBody() {
+        return body;
     }
 
     /**
-     * Sets the value of the getFood property.
+     * Sets the value of the body property.
      * 
      * @param value
      *     allowed object is
-     *     {@link GetFood }
+     *     {@link Body }
      *     
      */
-    public void setGetFood(GetFood value) {
-        this.getFood = value;
+    public void setBody(Body value) {
+        this.body = value;
     }
 
 }

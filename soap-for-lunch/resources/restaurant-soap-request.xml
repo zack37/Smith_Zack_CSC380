@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope">
+    <soap:Body xmlns:restaurant="http://neumont.edu/zsmith/lunch/restaurant">
+        <restaurant:GetRestaurants/>
+    </soap:Body>
+</soap:Envelope>
