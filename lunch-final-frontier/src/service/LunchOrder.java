@@ -23,7 +23,7 @@ public class LunchOrder implements ILunchOrder {
         restaurants = new ArrayList<>();
         ArrayList<Food> foods = new ArrayList<>();
         for (int i = 0; i < 10; i++)
-            foods.add(new Food(i + ",", null));
+            foods.add(new Food("Restaurant " + i + ",", null));
         for (int i = 0; i < 10; i++)
             restaurants.add(new Restaurant(i + "", foods));
     }
