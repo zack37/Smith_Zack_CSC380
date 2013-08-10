@@ -22,6 +22,6 @@ public class LunchOrderServlet extends CXFNonSpringServlet {
         super.loadBus(sc);
         Bus bus = getBus();
         BusFactory.setDefaultBus(bus);
-        Endpoint.publish("LunchOrderService", new LunchOrder());
+        Endpoint.publish("/LunchOrderService", new LunchOrder());
     }
 }

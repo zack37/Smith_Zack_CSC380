@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 8/9/13
  * Time: 4:36 PM
  */
-@WebService(endpointInterface = "service.ILunchOrder", serviceName = "LunchService")
+@WebService(endpointInterface = "service.ILunchOrder", serviceName = "LunchOrderService")
 public class LunchOrder implements ILunchOrder {
 
     private static final List<Restaurant> restaurants;
@@ -23,9 +23,9 @@ public class LunchOrder implements ILunchOrder {
         restaurants = new ArrayList<>();
         ArrayList<Food> foods = new ArrayList<>();
         for (int i = 0; i < 10; i++)
-            foods.add(new Food("Restaurant " + i + ",", null));
+            foods.add(new Food("Food " + i, null));
         for (int i = 0; i < 10; i++)
-            restaurants.add(new Restaurant(i + "", foods));
+            restaurants.add(new Restaurant("Restaurant " + i, foods));
     }
 
     @Override

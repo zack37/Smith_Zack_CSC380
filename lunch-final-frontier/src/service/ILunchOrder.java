@@ -4,6 +4,7 @@ import models.Food;
 import models.Restaurant;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import java.util.List;
@@ -20,5 +21,5 @@ public interface ILunchOrder {
     public @WebResult(name = "Restaurant") List<Restaurant> getRestaurants();
 
     @WebMethod(operationName = "order")
-    public @WebResult(name="Confirmation") String order(Restaurant r, Food f);
+    public @WebResult(name="Confirmation") String order(@WebParam(name="restaurant")Restaurant r, @WebParam(name="food")Food f);
 }
